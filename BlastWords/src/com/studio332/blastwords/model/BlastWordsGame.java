@@ -58,8 +58,14 @@ public class BlastWordsGame {
       this.words = new HashSet<String>(Arrays.asList(wordList));
 
       // read in the letter distributon and use it to create a pool of letters
+      this.rand = new Random();
       this.letterPool = new ArrayList<Character>();
-      handle = Gdx.files.internal("data/letter_dist.dat");
+      refillLetterPool();
+   }
+   
+   private void refillLetterPool() {
+      this.letterPool.clear();
+      FileHandle handle = Gdx.files.internal("data/letter_dist.dat");
       String[] lines = handle.readString().split("\n");
       for (int i = 0; i < lines.length; i++) {
          String[] inf = lines[i].split(",");
@@ -72,7 +78,6 @@ public class BlastWordsGame {
          }
       }
       Collections.shuffle(this.letterPool);
-      this.rand = new Random();
    }
 
    public void tick() {
@@ -152,11 +157,15 @@ public class BlastWordsGame {
       }
       
       // start with a normal draw
-      // TODO create letter stock. draw from it till empty. refill from pool )r something)
       this.lastDropTime = this.elapsedTime;
       Collections.shuffle(this.letterPool);
-      Character character = this.letterPool.get(0);
+      Character character = this.letterPool.remove(0);
       LetterInfo.Type type = Type.NORMAL;
+      
+      // refill letters if empty
+      if ( this.letterPool.size() == 0) {
+         refillLetterPool();
+      }
       
       // first see if it should lock
       if (this.rand.nextInt(100) <= LOCK_THRESHOLD) {
@@ -180,10 +189,19 @@ public class BlastWordsGame {
       }
 
       String lcWordRegex = word.toLowerCase();
-      lcWordRegex = lcWordRegex.replaceAll("\\?", "\\\\S");
       for ( String dictWord : this.words) {
-         if ( dictWord.matches(lcWordRegex) ) {
-            return true;
+         int matchCnt = 0;
+         if ( dictWord.length() == word.length()) {
+            for ( int i=0;i<dictWord.length();i++) {
+               if ( dictWord.charAt(i) == lcWordRegex.charAt(i) || lcWordRegex.charAt(i) == '?') {
+                  matchCnt++;
+               }
+            }
+            
+            if ( matchCnt == dictWord.length()) {
+               return true;
+            }
+            
          }
       }
 

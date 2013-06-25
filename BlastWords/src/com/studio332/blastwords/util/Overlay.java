@@ -16,6 +16,7 @@ public class Overlay extends Image {
    
    public void dimScreen() {
       setTouchable(Touchable.enabled);
+      setColor(0.0f,0.0f, 0.0f, 0.0f);
       addAction( BlastWordsActions.fadeTo(0.7f, 0.5f) );
    }
    
