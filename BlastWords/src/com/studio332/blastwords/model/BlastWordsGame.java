@@ -138,20 +138,53 @@ public class BlastWordsGame {
       return this.timedModeDurationSecs;
    }
 
-   public LetterInfo newLetter() {
+   public LetterInfo newLetter(final int currWilds, int currBlockers) {
+      int maxWild = 1;
+      if ( this.mode.equals(Mode.CLEAR)) {
+         maxWild = 2;
+      }
+      
+      int maxBlockers = 3;
+      if ( this.mode.equals(Mode.TIMED)) {
+          maxBlockers = 5;
+      } else if (this.mode.equals(Mode.CLEAR)) {
+          maxBlockers = 4;
+      }
+      
+      // start with a normal draw
+      // TODO create letter stock. draw from it till empty. refill from pool )r something)
       this.lastDropTime = this.elapsedTime;
       Collections.shuffle(this.letterPool);
       Character character = this.letterPool.get(0);
       LetterInfo.Type type = Type.NORMAL;
+      
+      // first see if it should lock
       if (this.rand.nextInt(100) <= LOCK_THRESHOLD) {
          type = Type.LOCKED;
+      } else {
+         // next, check for turning it into a special tile
+         if ( currBlockers < maxBlockers && this.rand.nextInt(100) <= 15 ) {
+            character = LetterInfo.BLOCKER_CHAR;
+            type = Type.BLOCKER;
+         } else if ( currWilds < maxWild && this.rand.nextInt(100) <= 5 ) {
+            character = LetterInfo.WILD_CHAR;
+            type = Type.WILD;
+         }
       }
       return new LetterInfo(type, character);
    }
 
    public boolean isWord(final String word) {
-      if (this.words.contains(word.toLowerCase())) {
-         return true;
+      if ( word.indexOf(LetterInfo.BLOCKER_CHAR) > -1 ) {
+         return false;
+      }
+
+      String lcWordRegex = word.toLowerCase();
+      lcWordRegex = lcWordRegex.replaceAll("\\?", "\\\\S");
+      for ( String dictWord : this.words) {
+         if ( dictWord.matches(lcWordRegex) ) {
+            return true;
+         }
       }
 
       this.score -= 15;
@@ -246,14 +279,22 @@ public class BlastWordsGame {
    }
 
    public void scoreWord(String word, int lockedCount) {
-      int wordScore = 10 * word.length();
-      if (word.length() >= 5) {
+      int wildCnt = 0;
+      for (int i=0; i<word.length();i++) {
+         if ( word.charAt(i) == LetterInfo.WILD_CHAR ) {
+            wildCnt++;
+         }
+      }
+      
+      int wordLen = word.length() - wildCnt;
+      int wordScore = 10 * wordLen;
+      if (wordLen >= 5) {
          wordScore += 20; // doubled ... was 10, 20, 40
       }
-      if (word.length() >= 6) {
+      if (wordLen >= 6) {
          wordScore += 40;
       }
-      if (word.length() == 7) {
+      if (wordLen == 7) {
          wordScore += 80;
       }
 
@@ -263,8 +304,8 @@ public class BlastWordsGame {
 
       // track the number of times each sized word is created
       this.score += wordScore;
-      int oldCnt = this.wordSizeCount.get(word.length());
+      int oldCnt = this.wordSizeCount.get(wordLen);
       oldCnt++;
-      this.wordSizeCount.put(word.length(), oldCnt);
+      this.wordSizeCount.put(wordLen, oldCnt);
    }
 }

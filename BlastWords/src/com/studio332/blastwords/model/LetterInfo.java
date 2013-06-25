@@ -1,9 +1,13 @@
 package com.studio332.blastwords.model;
 
 public class LetterInfo {
-   public enum Type {NORMAL, LOCKED}
+   public enum Type {NORMAL, LOCKED, WILD, BLOCKER}
    private final Type type;
    private final Character character;
+   
+   public static final Character BLOCKER_CHAR = ' ';
+   public static final Character WILD_CHAR = '?';
+
    
    public LetterInfo(Type t, Character c) {
       this.type = t;

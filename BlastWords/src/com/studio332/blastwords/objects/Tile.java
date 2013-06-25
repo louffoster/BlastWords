@@ -30,6 +30,12 @@ public class Tile extends Image {
       this.info = info;
       
       String imgName = info.getCharacter().toString().toLowerCase()+"-off";
+      if ( info.getType().equals(Type.WILD)) {
+         imgName = "wild-off";
+      } else if ( info.getType().equals(Type.BLOCKER)) {
+         imgName = "blocker-off";
+      }
+      
       Image i = new Image(Assets.instance().getDrawable(imgName));
       setDrawable(i.getDrawable() );
       setWidth(i.getWidth());
@@ -73,18 +79,27 @@ public class Tile extends Image {
    public boolean isSelected() {
       return this.selected;
    }
+   
+   public Type getType() {
+      return this.info.getType();
+   }
 
    public void setSelected(boolean sel) {
       this.selected = sel;
       this.hold = false;
 
+      String imgName = this.info.getCharacter().toString().toLowerCase();
+      if ( info.getType().equals(Type.WILD)) {
+         imgName = "wild";
+      } else if ( info.getType().equals(Type.BLOCKER)) {
+         imgName = "blocker";
+      }
+      
       if (this.selected == false) {
-         String imgName = this.info.getCharacter().toString().toLowerCase()+"-off";
-         setDrawable(Assets.instance().getDrawable(imgName));
+         setDrawable(Assets.instance().getDrawable(imgName+"-off"));
       } else {
          SoundManager.instance().playSound(SoundManager.SELECT_TILE);
-         String imgName = this.info.getCharacter().toString().toLowerCase()+"-on";
-         setDrawable(Assets.instance().getDrawable(imgName));
+         setDrawable(Assets.instance().getDrawable(imgName+"-on"));
       }
    }
    
@@ -108,9 +123,17 @@ public class Tile extends Image {
    public Character getCharacter() {
       return this.info.getCharacter();
    }
+   
+   public boolean isBlocker() {
+      return this.info.getType().equals(Type.BLOCKER);
+   }
+   
+   public boolean isWild() {
+      return this.info.getType().equals(Type.WILD);
+   }
 
    public boolean isLocked() {
-      return this.info.getType().equals(Type.LOCKED);
+      return (isBlocker() || this.info.getType().equals(Type.LOCKED));
    }
 
    @Override

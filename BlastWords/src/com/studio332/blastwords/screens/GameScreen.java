@@ -30,6 +30,7 @@ import com.studio332.blastwords.model.BlastWordsGame;
 import com.studio332.blastwords.model.BlastWordsGame.Mode;
 import com.studio332.blastwords.model.BlastWordsGame.State;
 import com.studio332.blastwords.model.LetterInfo;
+import com.studio332.blastwords.model.LetterInfo.Type;
 import com.studio332.blastwords.model.Settings;
 import com.studio332.blastwords.objects.Blaster;
 import com.studio332.blastwords.objects.Bomb;
@@ -238,6 +239,24 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
          }
       }));
    }
+   
+   private int countTileType( Type tileType) {
+      int cnt = 0;
+      for ( Tile tile : this.tiles ) {
+         if ( tile.getType().equals(tileType ) ) {
+            cnt++;
+         }
+      }
+      return cnt;
+  }
+
+  // Get a new letter and ensure that there are not too many blockers
+  private LetterInfo pickNewLetter() {
+     int blockerCnt = countTileType(Type.BLOCKER);
+     int wildCnt = countTileType(Type.WILD);
+     LetterInfo info = this.gameModel.newLetter(wildCnt, blockerCnt);
+      return info;
+  }
 
    private void initBoard() {      
       int totalRows = NUM_ROWS;
@@ -251,7 +270,7 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
          @Override
          public void run() {
             for (int i = 0; i < NUM_COLS; i++) {
-               LetterInfo info = gameModel.newLetter();
+               LetterInfo info = pickNewLetter();
                Tile tile = new Tile(info);
                if  ( tileW == -1 ) {
                   tileW = (int)tile.getWidth();
@@ -269,7 +288,7 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
             }
          }
          
-      }, 0.0f, 0.075f, totalRows-1);
+      }, 0.0f, 0.175f, totalRows-1);
    }
 
    private void startGame() {
@@ -670,7 +689,7 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
             float topRowY = BOARD_BOTTOM + 9 * tileH;
             int tileCnt = tiles.size();
             for (int i = 0; i < (70 - tileCnt); i++) {
-               LetterInfo info = gameModel.newLetter();
+               LetterInfo info = pickNewLetter();
                Tile tile = new Tile(info);
                while (col < 7) {
                   float colX = BOARD_LEFT + col * tileW;
@@ -698,7 +717,7 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
          }
 
          if (this.gameModel.readyToDropTile()) {
-             Tile tile = new Tile( this.gameModel.newLetter() );
+             Tile tile = new Tile( pickNewLetter() );
              int col = this.rand.nextInt(7);
              if ( this.lastDropCol != -1 ) {
                 while ( col == this.lastDropCol) {

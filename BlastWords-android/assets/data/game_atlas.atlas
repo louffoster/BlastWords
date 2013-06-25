@@ -5,100 +5,114 @@ filter: Linear,Nearest
 repeat: none
 a-off
   rotate: false
-  xy: 954, 280
+  xy: 954, 352
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 a-on
   rotate: false
-  xy: 954, 210
+  xy: 954, 282
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 b-off
   rotate: false
-  xy: 954, 140
+  xy: 954, 212
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 b-on
   rotate: false
-  xy: 954, 70
+  xy: 954, 142
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 background2
   rotate: false
-  xy: 0, 518
+  xy: 0, 527
   size: 800, 490
   orig: 800, 490
   offset: 0, 0
   index: -1
 blank-off
   rotate: false
-  xy: 954, 0
+  xy: 954, 72
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 blaster-body
   rotate: false
-  xy: 800, 732
+  xy: 800, 804
   size: 185, 213
   orig: 185, 213
   offset: 0, 0
   index: -1
 blaster-plunger
   rotate: false
-  xy: 800, 519
+  xy: 800, 591
   size: 185, 213
   orig: 185, 213
   offset: 0, 0
   index: -1
 min-hand
   rotate: false
-  xy: 800, 350
+  xy: 800, 422
   size: 168, 169
   orig: 168, 169
   offset: 0, 0
   index: -1
+number-0
+  rotate: false
+  xy: 786, 0
+  size: 60, 84
+  orig: 60, 84
+  offset: 0, 0
+  index: -1
+number-1
+  rotate: false
+  xy: 846, 0
+  size: 60, 84
+  orig: 60, 84
+  offset: 0, 0
+  index: -1
 rules1
   rotate: false
-  xy: 0, 6
+  xy: 0, 15
   size: 786, 512
   orig: 786, 512
   offset: 0, 0
   index: -1
 sec-hand
   rotate: false
-  xy: 786, 181
+  xy: 786, 253
   size: 168, 169
   orig: 168, 169
   offset: 0, 0
   index: -1
+sound-off
+  rotate: false
+  xy: 906, 0
+  size: 60, 72
+  orig: 60, 72
+  offset: 0, 0
+  index: -1
 timer
   rotate: false
-  xy: 786, 12
+  xy: 786, 84
   size: 168, 169
   orig: 168, 169
   offset: 0, 0
   index: -1
 times2
   rotate: false
-  xy: 968, 489
+  xy: 968, 561
   size: 40, 30
   orig: 40, 30
-  offset: 0, 0
-  index: -1
-wires
-  rotate: false
-  xy: 800, 945
-  size: 221, 63
-  orig: 221, 63
   offset: 0, 0
   index: -1
 
@@ -106,6 +120,20 @@ game_atlas2.png
 format: RGBA8888
 filter: Linear,Nearest
 repeat: none
+blocker-off
+  rotate: false
+  xy: 786, 408
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+blocker-on
+  rotate: false
+  xy: 856, 352
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
 bomb-on
   rotate: false
   xy: 800, 759
@@ -122,96 +150,82 @@ bomb-used
   index: -1
 c-off
   rotate: false
-  xy: 786, 408
+  xy: 786, 338
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 c-on
   rotate: false
-  xy: 856, 352
+  xy: 926, 352
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 d-off
   rotate: false
-  xy: 786, 338
+  xy: 856, 282
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 d-on
   rotate: false
-  xy: 926, 352
+  xy: 786, 268
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 e-off
   rotate: false
-  xy: 856, 282
+  xy: 926, 282
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 e-on
   rotate: false
-  xy: 786, 268
+  xy: 856, 212
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 f-off
   rotate: false
-  xy: 926, 282
+  xy: 786, 198
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 f-on
   rotate: false
-  xy: 856, 212
+  xy: 926, 212
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 g-off
   rotate: false
-  xy: 786, 198
+  xy: 856, 142
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 g-on
   rotate: false
-  xy: 926, 212
+  xy: 786, 128
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 h-off
   rotate: false
-  xy: 856, 142
-  size: 70, 70
-  orig: 70, 70
-  offset: 0, 0
-  index: -1
-h-on
-  rotate: false
-  xy: 786, 128
-  size: 70, 70
-  orig: 70, 70
-  offset: 0, 0
-  index: -1
-i-off
-  rotate: false
   xy: 926, 142
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
-i-on
+h-on
   rotate: false
   xy: 906, 72
   size: 70, 70
@@ -239,14 +253,14 @@ music-on
   orig: 100, 120
   offset: 0, 0
   index: -1
-number-0
+number-2
   rotate: false
   xy: 786, 44
   size: 60, 84
   orig: 60, 84
   offset: 0, 0
   index: -1
-number-1
+number-3
   rotate: false
   xy: 846, 44
   size: 60, 84
@@ -274,7 +288,7 @@ rules2
   orig: 786, 512
   offset: 0, 0
   index: -1
-sound-off
+sound-on
   rotate: false
   xy: 906, 0
   size: 60, 72
@@ -309,177 +323,184 @@ filter: Linear,Nearest
 repeat: none
 credits
   rotate: false
-  xy: 0, 274
+  xy: 0, 272
   size: 660, 742
   orig: 660, 742
   offset: 0, 0
   index: -1
 giveUpMenu
   rotate: false
-  xy: 660, 380
+  xy: 660, 378
   size: 327, 283
   orig: 327, 283
   offset: 0, 0
   index: -1
+i-off
+  rotate: false
+  xy: 777, 224
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+i-on
+  rotate: false
+  xy: 847, 224
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
 j-off
   rotate: false
-  xy: 837, 226
+  xy: 717, 140
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 j-on
   rotate: false
-  xy: 837, 156
+  xy: 717, 70
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 k-off
   rotate: false
-  xy: 717, 58
+  xy: 787, 154
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 k-on
   rotate: false
-  xy: 907, 226
+  xy: 787, 84
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 l-off
   rotate: false
-  xy: 907, 156
+  xy: 857, 154
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 l-on
   rotate: false
-  xy: 787, 70
+  xy: 857, 84
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 locked
   rotate: false
-  xy: 857, 86
+  xy: 917, 224
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 m-off
   rotate: false
-  xy: 927, 86
+  xy: 927, 154
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 m-on
   rotate: false
-  xy: 857, 16
+  xy: 927, 84
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 menu_title
   rotate: false
-  xy: 0, 32
+  xy: 0, 30
   size: 424, 242
   orig: 424, 242
   offset: 0, 0
   index: -1
 n-off
   rotate: false
-  xy: 927, 16
+  xy: 787, 14
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 n-on
   rotate: false
-  xy: 787, 0
+  xy: 857, 14
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
-number-2
-  rotate: false
-  xy: 660, 296
-  size: 60, 84
-  orig: 60, 84
-  offset: 0, 0
-  index: -1
-number-3
-  rotate: false
-  xy: 720, 296
-  size: 60, 84
-  orig: 60, 84
-  offset: 0, 0
-  index: -1
 number-4
   rotate: false
-  xy: 780, 296
+  xy: 660, 294
   size: 60, 84
   orig: 60, 84
   offset: 0, 0
   index: -1
 number-5
   rotate: false
-  xy: 840, 296
+  xy: 720, 294
   size: 60, 84
   orig: 60, 84
   offset: 0, 0
   index: -1
 number-6
   rotate: false
-  xy: 900, 296
+  xy: 780, 294
   size: 60, 84
   orig: 60, 84
   offset: 0, 0
   index: -1
 number-7
   rotate: false
-  xy: 717, 212
+  xy: 840, 294
   size: 60, 84
   orig: 60, 84
   offset: 0, 0
   index: -1
 number-8
   rotate: false
-  xy: 717, 128
+  xy: 900, 294
   size: 60, 84
   orig: 60, 84
   offset: 0, 0
   index: -1
 number-9
   rotate: false
-  xy: 777, 212
+  xy: 717, 210
   size: 60, 84
   orig: 60, 84
   offset: 0, 0
   index: -1
+o-off
+  rotate: false
+  xy: 927, 14
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+o-on
+  rotate: false
+  xy: 717, 0
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
 pauseMenu
   rotate: false
-  xy: 660, 663
+  xy: 660, 661
   size: 325, 353
   orig: 325, 353
   offset: 0, 0
   index: -1
 ready
   rotate: false
-  xy: 424, 61
+  xy: 424, 59
   size: 293, 213
   orig: 293, 213
-  offset: 0, 0
-  index: -1
-sound-on
-  rotate: false
-  xy: 777, 140
-  size: 60, 72
-  orig: 60, 72
   offset: 0, 0
   index: -1
 
@@ -501,72 +522,58 @@ menu_opts
   orig: 488, 559
   offset: 0, 0
   index: -1
-o-off
+p-off
   rotate: false
   xy: 800, 891
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
-o-on
+p-on
   rotate: false
   xy: 800, 821
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
-p-off
+q-off
   rotate: false
   xy: 800, 751
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
-p-on
+q-on
   rotate: false
   xy: 800, 681
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
-q-off
+r-off
   rotate: false
   xy: 800, 611
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
-q-on
+r-on
   rotate: false
   xy: 870, 891
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
-r-off
+s-off
   rotate: false
   xy: 870, 821
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
-r-on
-  rotate: false
-  xy: 870, 751
-  size: 70, 70
-  orig: 70, 70
-  offset: 0, 0
-  index: -1
-s-off
-  rotate: false
-  xy: 870, 681
-  size: 70, 70
-  orig: 70, 70
-  offset: 0, 0
-  index: -1
 s-on
   rotate: false
-  xy: 870, 611
+  xy: 870, 751
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
@@ -587,54 +594,68 @@ splash1
   index: -1
 t-off
   rotate: false
-  xy: 814, 348
+  xy: 870, 681
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 t-on
   rotate: false
-  xy: 814, 278
+  xy: 870, 611
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 u-off
   rotate: false
-  xy: 814, 208
+  xy: 814, 348
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 u-on
   rotate: false
-  xy: 488, 185
+  xy: 814, 278
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 v-off
   rotate: false
-  xy: 558, 185
+  xy: 814, 208
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 v-on
   rotate: false
-  xy: 628, 185
+  xy: 488, 185
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 w-off
   rotate: false
-  xy: 698, 185
+  xy: 558, 185
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 w-on
+  rotate: false
+  xy: 628, 185
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+wild-off
+  rotate: false
+  xy: 698, 185
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+wild-on
   rotate: false
   xy: 768, 138
   size: 70, 70
