@@ -107,9 +107,14 @@ public class Tile extends Image {
       setDrawable(Assets.instance().getDrawable("blank-off"));
    }
    
-   public void show() {
-      String imgName = this.info.getCharacter().toString().toLowerCase()+"-off";
-      setDrawable(Assets.instance().getDrawable(imgName));
+   public void show() {      
+      String imgName = this.info.getCharacter().toString().toLowerCase();
+      if ( info.getType().equals(Type.WILD)) {
+         imgName = "wild";
+      } else if ( info.getType().equals(Type.BLOCKER)) {
+         imgName = "blocker";
+      }
+      setDrawable(Assets.instance().getDrawable(imgName+"-off"));
    }
    
    @Override

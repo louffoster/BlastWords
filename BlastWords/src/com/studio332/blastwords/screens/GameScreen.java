@@ -1000,7 +1000,6 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
          if (tile.getVelocity() == 0.0f) {
             int row = rowFromY(tile.getY());
             if (row > (NUM_ROWS - 1)) {
-               this.gameModel.setState(State.GAME_OVER);
                explodeTile(tile);
                return true;
             } else if (row == NUM_ROWS - 2) {
@@ -1041,15 +1040,16 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
                }  
             }, 2.0f);
          } else if ( isGameOver() ) {
-            hideTiles(true);
-            Timer.schedule(new Task() {
-               @Override
-               public void run() {
-                  if ( gameModel.getState().equals(State.GAME_OVER) == false) {
+            if ( gameModel.getState().equals(State.GAME_OVER) == false) {
+               this.gameModel.setState(State.GAME_OVER);
+               hideTiles(true);
+               Timer.schedule(new Task() {
+                  @Override
+                  public void run() {
                      gameOver();
-                  }
-               }  
-            }, 2.0f);
+                  }  
+               }, 2.0f);
+            }
          }
       }
       
