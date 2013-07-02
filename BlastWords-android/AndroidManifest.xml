@@ -6,6 +6,12 @@
     android:installLocation="auto" >
 
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17" />
+    
+    <supports-screens 
+        android:smallScreens="false"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"/>
 
     <application
         android:allowBackup="false"

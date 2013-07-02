@@ -7,13 +7,14 @@ import com.studio332.blastwords.util.Assets;
 
 public class Bomb extends Image {
    private BombListener listener = null;
+   private boolean used = false;
    
    public Bomb() {
       super(Assets.instance().getAtlasRegion("bomb-on"));     
       addListener(new InputListener() {
          @Override
          public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            if ( listener != null ) {
+            if ( listener != null && used == false ) {
                if ( listener.detonateRequested() ) {
                   detonate();
                }
@@ -28,6 +29,7 @@ public class Bomb extends Image {
    }
    
    private void detonate() {
+      this.used = true;
       this.setDrawable( Assets.instance().getDrawable("bomb-used"));
    }
    
