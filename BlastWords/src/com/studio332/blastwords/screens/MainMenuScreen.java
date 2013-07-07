@@ -95,15 +95,28 @@ public class MainMenuScreen extends AbstractScreen {
       });
 
       // legend
-      final Group legend = Assets.instance().makeFullscreenImg("legend");
+      final Group legend = Assets.instance().makeFullscreenImg("legend1-");
+      final Group legend2 = Assets.instance().makeFullscreenImg("legend2-");
       legend.setPosition(-legend.getWidth(),(BlastWords.TGT_HEIGHT-legend.getHeight())/2);
+      legend2.setPosition(-legend.getWidth(),(BlastWords.TGT_HEIGHT-legend.getHeight())/2);
       legend.addListener(new InputListener() {
+         @Override
+         public boolean touchDown(InputEvent event, float x, float y,
+               int pointer, int button) {
+            showPage(legend2, legend2.getWidth(), legend2.getHeight());
+            return false;
+         }
+      });
+      legend2.addListener(new InputListener() {
          @Override
          public boolean touchDown(InputEvent event, float x, float y,
                int pointer, int button) {
             SoundManager.instance().playSound(SoundManager.PAGE_TURN);
             legend.addAction(moveTo(-legend.getWidth(),
                   (BlastWords.TGT_HEIGHT - legend.getHeight()) * 0.6f, 0.75f,
+                  Interpolation.swingOut));
+            legend2.addAction(moveTo(-legend2.getWidth(),
+                  (BlastWords.TGT_HEIGHT - legend2.getHeight()) * 0.6f, 0.75f,
                   Interpolation.swingOut));
             return false;
          }
@@ -142,6 +155,8 @@ public class MainMenuScreen extends AbstractScreen {
       menuGroup.addActor(soundToggle);
       menuGroup.addActor(credits);
       menuGroup.addActor(legend);
+      menuGroup.addActor(legend2);
+
       menuGroup.getColor().a = 0.0f;
       this.stage.addActor(menuGroup);
 

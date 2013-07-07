@@ -214,14 +214,33 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
 
    private void showRules(final boolean firstTime) {
       Settings.instance().rulesViewed();
-      final Group rules = Assets.instance().makeFullscreenImg("rules", 2);
+      final Group rules = Assets.instance().makeFullscreenImg("rules1-", 3);
+      final Group rules2 = Assets.instance().makeFullscreenImg("rules2-", 3);
       rules.setPosition(0, 1024.0f);
+      rules2.setPosition(0, 1024.0f);
       this.stage.addActor(rules);
       rules.addAction(moveTo(0.0f, this.scrH - rules.getHeight(), 0.25f, Interpolation.pow2In));
       rules.addListener(new InputListener() {
          @Override
          public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            hideRules(rules, firstTime);
+            stage.addActor(rules2);
+            rules2.addAction( sequence(
+                  moveTo(0.0f, scrH - rules.getHeight(), 0.25f, Interpolation.pow2In),
+                  new Action() {
+                     @Override
+                     public boolean act(float delta) {
+                        rules.remove();
+                        return false;
+                     }
+                  }
+                  ));
+            return true;
+         }
+      });
+      rules2.addListener(new InputListener() {
+         @Override
+         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            hideRules(rules2, firstTime);
             return true;
          }
       });
