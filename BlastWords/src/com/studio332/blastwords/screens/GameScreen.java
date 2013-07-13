@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.studio332.blastwords.BlastWords;
@@ -182,14 +183,12 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
             Assets.instance().getDrawable("pause-on"));
       this.pause.setSize(87, 69);
       this.pause.setPosition(16, 0);
-      this.pause.addListener(new InputListener() {
+      this.pause.addListener(new ClickListener() {
          @Override
-         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            if (blasting || gameModel.getState().equals(State.GAME_OVER) ) {
-               return false;
+         public void clicked(InputEvent event, float x, float y) {
+            if (blasting == false && !gameModel.getState().equals(State.GAME_OVER) ) {
+               handlePauseTap();
             }
-            handlePauseTap();
-            return false;
          }
       });
    }
