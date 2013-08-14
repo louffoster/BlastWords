@@ -69,7 +69,6 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
 
    private static final float BOARD_LEFT = 95;
    private static final float BOARD_BOTTOM = 195;
-   private static final float START_OFFSET = 35.0f;
    private static final float FAST_FALL = 900.0f;
    private static final int NUM_ROWS = 10;
    private static final int NUM_COLS = 7;
@@ -712,7 +711,7 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
                while (col < 7) {
                   float colX = BOARD_LEFT + col * tileW;
                   if (findTileAtPos(colX, topRowY) == null) {
-                     tile.setPosition(colX, topRowY+START_OFFSET);
+                     tile.setPosition(colX, topRowY+tileH);
                      tiles.add(tile);
                      gameGrp.addActor(tile);
                      col++;
@@ -745,7 +744,7 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
              
              this.lastDropCol = col;
              tile.setPosition(BOARD_LEFT+col*tile.getWidth(), 
-                   BOARD_BOTTOM+10*tile.getHeight()+START_OFFSET);
+                   BOARD_BOTTOM+10*tile.getHeight()+tileH);
              tile.setVelocity( this.gameModel.getFallRate() );
              this.tiles.add(tile);
              tile.fadeThenDrop();
@@ -977,8 +976,8 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
                canClick = false;
             }
             
-            float yPos = tile.getY();
-            float projectedY = yPos - tile.getVelocity() * delta;
+            float origY =  tile.getY();
+            float projectedY = tile.getY() - tile.getVelocity() * delta;
             if ( projectedY <= BOARD_BOTTOM) {
                tile.setPosition(tile.getX(), BOARD_BOTTOM);
                tile.stop();
@@ -989,7 +988,8 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
                      continue;
                   }
                   if ( other.getX() == tile.getX() ) {
-                     if ( projectedY >= other.getY() && projectedY <= other.getY()+other.getHeight() ) {
+                     float otherTop = other.getY()+other.getHeight();
+                     if ( tile.getY() >= otherTop && projectedY < otherTop  ) {
                         tile.setPosition(tile.getX(), other.getY()+other.getHeight() );
                         tile.stop();
                      }
@@ -999,7 +999,7 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
                if ( tile.getVelocity() > 0.0f ) {
                   tile.setPosition(tile.getX(), projectedY);
                } else {
-                  if ( canClick ) {
+                  if ( canClick && tile.getY() != origY ) {
                      SoundManager.instance().playSound(SoundManager.TILE_CLICK);
                   }
                }
@@ -1036,6 +1036,7 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
       final float FIXED_TIMESTEP = 1.0f / 60.0f;
       final float MINIMUM_TIMESTEP = 1.0f / 600.0f;
       float frameTime = delta;
+      frameTime = Math.min(frameTime, 0.02f);
       while ( frameTime > 0.0 ){
           float deltaTime = Math.min( frameTime, FIXED_TIMESTEP );
           frameTime -= deltaTime;

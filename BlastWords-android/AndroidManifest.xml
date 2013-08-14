@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.studio332.blastwords"
-    android:versionCode="3"
-    android:versionName="1.2"
+    android:versionCode="4"
+    android:versionName="1.4"
     android:installLocation="auto" >
 
-    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17" />
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="18" />
     
     <supports-screens 
         android:smallScreens="false"
