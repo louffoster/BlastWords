@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
@@ -24,13 +23,12 @@ public class BlastWordsGame {
    };
 
    private static final int START_BOMBS = 3;
-   private static final int LOCK_THRESHOLD = 18;//17;
    private static final float START_FALL_RATE = 125.0f;
    private static final int BOMB_BONUS = 25;
 
    private Set<String> words = null;
    private List<Character> letterPool = null;
-   private Random rand;
+   private List<Type> letterTypes = null;
    private Mode mode;
    private State state;
    private final int timedModeDurationSecs = 90;
@@ -51,6 +49,19 @@ public class BlastWordsGame {
       for (int i = 0; i <= 7; i++) {
          this.wordSizeCount.put(i, 0);
       }
+      
+      // create a list of tile types. this is used to reandomly
+      // determine which type of tile will be drawn, normal, wild, locked, blocker
+      this.letterTypes = new ArrayList<LetterInfo.Type>();
+      this.letterTypes.add(Type.WILD);
+      this.letterTypes.add(Type.BLOCKER);
+      
+      for ( int i=0; i<2; i++ ) { // 4 (orig), 3(first try) 
+         this.letterTypes.add(Type.LOCKED);
+      }
+      for ( int i=0; i<8; i++ ) { // 10 orig
+         this.letterTypes.add(Type.NORMAL);
+      }
 
       // stuff the dictionary into a set
       FileHandle handle = Gdx.files.internal("data/blastwords_dict.txt");
@@ -58,7 +69,6 @@ public class BlastWordsGame {
       this.words = new HashSet<String>(Arrays.asList(wordList));
 
       // read in the letter distributon and use it to create a pool of letters
-      this.rand = new Random();
       this.letterPool = new ArrayList<Character>();
       refillLetterPool();
    }
@@ -143,43 +153,42 @@ public class BlastWordsGame {
       return this.timedModeDurationSecs;
    }
 
-   public LetterInfo newLetter(final int currWilds, int currBlockers) {
-      int maxWild = 1;
-      if ( this.mode.equals(Mode.CLEAR)) {
-         maxWild = 2;
-      }
-      
-      int maxBlockers = 3;
-      if ( this.mode.equals(Mode.TIMED)) {
-          maxBlockers = 5;
-      } else if (this.mode.equals(Mode.CLEAR)) {
-          maxBlockers = 4;
-      }
+   public LetterInfo newLetter(final int currWilds, int currBlockers, int currLocked) {
+      final int maxWild = 1;
+      final int maxBlockers = 4; // was 4
+      final int maxLocked = 12;  // was 10
+            
+      boolean done = true;
+      LetterInfo.Type type = Type.NORMAL;
+      Collections.shuffle(this.letterTypes);
+      do {
+         done = true;
+         type = this.letterTypes.get(0);
+         if ( type.equals(Type.WILD) && currWilds == maxWild || 
+              type.equals(Type.BLOCKER) && currBlockers == maxBlockers ||  
+              type.equals(Type.LOCKED) && currLocked == maxLocked) {
+            done = false;
+            Collections.shuffle(this.letterTypes);
+         }
+      } while ( !done );
       
       // start with a normal draw
-      this.lastDropTime = this.elapsedTime;
       Collections.shuffle(this.letterPool);
-      Character character = this.letterPool.remove(0);
-      LetterInfo.Type type = Type.NORMAL;
+      Character character = null;
+      character = this.letterPool.remove(0);
       
       // refill letters if empty
       if ( this.letterPool.size() == 0) {
          refillLetterPool();
       }
       
-      // first see if it should lock
-      if (this.rand.nextInt(100) <= LOCK_THRESHOLD) {
-         type = Type.LOCKED;
-      } else {
-         // next, check for turning it into a special tile
-         if ( currBlockers < maxBlockers && this.rand.nextInt(100) <= 15 ) {
-            character = LetterInfo.BLOCKER_CHAR;
-            type = Type.BLOCKER;
-         } else if ( currWilds < maxWild && this.rand.nextInt(100) <= 5 ) {
-            character = LetterInfo.WILD_CHAR;
-            type = Type.WILD;
-         }
+      // set the letter based on special types
+      if (type.equals(Type.WILD)) {
+         character = LetterInfo.WILD_CHAR;
+      } else if ( type.equals(Type.BLOCKER )) {
+         character = LetterInfo.BLOCKER_CHAR;
       }
+
       return new LetterInfo(type, character);
    }
 

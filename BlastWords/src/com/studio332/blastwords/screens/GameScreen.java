@@ -271,8 +271,9 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
   private LetterInfo pickNewLetter() {
      int blockerCnt = countTileType(Type.BLOCKER);
      int wildCnt = countTileType(Type.WILD);
-     LetterInfo info = this.gameModel.newLetter(wildCnt, blockerCnt);
-      return info;
+     int lockCnt = countTileType(Type.LOCKED);
+     LetterInfo info = this.gameModel.newLetter(wildCnt, blockerCnt,lockCnt);
+     return info;
   }
 
    private void initBoard() {      
@@ -305,7 +306,7 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
             }
          }
          
-      }, 0.0f, 0.175f, totalRows-1);
+      }, 0.0f, 0.05f, totalRows-1);
    }
 
    private void startGame() {
@@ -1030,21 +1031,10 @@ public class GameScreen extends AbstractScreen implements Blaster.Listener, Game
    
    @Override
    public void render(float delta) {
-      // call 'simulation' of falling tiles with a fixed time
-      // step to avoid giant jumps in movemnt that cause tiles
-      // to pass through each other
-      final float FIXED_TIMESTEP = 1.0f / 60.0f;
-      final float MINIMUM_TIMESTEP = 1.0f / 600.0f;
       float frameTime = delta;
-      frameTime = Math.min(frameTime, 0.02f);
-      while ( frameTime > 0.0 ){
-          float deltaTime = Math.min( frameTime, FIXED_TIMESTEP );
-          frameTime -= deltaTime;
-          if (frameTime < MINIMUM_TIMESTEP) {
-              deltaTime += frameTime;
-              frameTime = 0.0f;
-          }
-          updateTiles(deltaTime);
+      frameTime = Math.min(frameTime, 0.1f);
+      if ( this.gameModel.getState().equals(State.PLAYING) ) {
+         updateTiles(frameTime);
       }
       
       // check for end game conditions
