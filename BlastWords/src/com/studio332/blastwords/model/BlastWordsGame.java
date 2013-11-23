@@ -55,8 +55,9 @@ public class BlastWordsGame {
       this.letterTypes = new ArrayList<LetterInfo.Type>();
       this.letterTypes.add(Type.WILD);
       this.letterTypes.add(Type.BLOCKER);
+      this.letterTypes.add(Type.BLOCKER);
       
-      for ( int i=0; i<2; i++ ) { // 4 (orig), 3(first try) 
+      for ( int i=0; i<4; i++ ) { // 4 (orig), 3(first try) 
          this.letterTypes.add(Type.LOCKED);
       }
       for ( int i=0; i<8; i++ ) { // 10 orig
@@ -155,7 +156,7 @@ public class BlastWordsGame {
 
    public LetterInfo newLetter(final int currWilds, int currBlockers, int currLocked) {
       final int maxWild = 1;
-      final int maxBlockers = 4; // was 4
+      final int maxBlockers = 3; // was 4
       final int maxLocked = 12;  // was 10
             
       boolean done = true;
