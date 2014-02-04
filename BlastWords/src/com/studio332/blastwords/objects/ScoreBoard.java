@@ -1,3 +1,10 @@
+/**
+ * BlastWords
+ * ScoreBoard.java
+ * 
+ * Created by Lou Foster
+ * Copyright Studio332 2013. All rights reserved.
+ */
 package com.studio332.blastwords.objects;
 
 import java.util.ArrayList;

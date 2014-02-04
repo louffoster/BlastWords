@@ -1,3 +1,10 @@
+/**
+ * BlastWords
+ * LetterInfo.java
+ * 
+ * Created by Lou Foster
+ * Copyright Studio332 2013. All rights reserved.
+ */
 package com.studio332.blastwords.model;
 
 public class LetterInfo {
